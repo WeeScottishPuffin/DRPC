@@ -13,7 +13,8 @@ except ModuleNotFoundError:
 
 APP_IDS={
   1:'1152230287137308773',  #Elderscrolls 6
-  2:'1152131176174190652'   #GTA 6
+  2:'1152131176174190652',  #GTA 6
+  3:''
 }
 print('''
 +---------------------------+
@@ -25,11 +26,16 @@ OPTIONS:
 ========
 1) The Elder Scrolls VI: Hammerfell
 2) Grand Theft Auto VI
+3) Custom
 ''')
 option=0
+limg='logo'
 while not option in APP_IDS.keys():
   try:
-    option = int(input("Pick an option [1-2]: "))
+    option = int(input("Pick an option [1-3]: "))
+    if option == 3: 
+      APP_IDS[3] = input("Custom app id")
+      limg = input("Discord application large_image name: ")
   except:
     option = 0
 print("Creating RPC Instance")
@@ -37,7 +43,7 @@ RPC = pypresence.Presence(APP_IDS[option])
 starttime=int(time.time())
 print("Connecting RPC Instance")
 RPC.connect()
-RPC.update(details="Just started playing",large_image="logo")
+RPC.update(details="Just started playing",large_image=limg)
 print("RPC Started, press CTRL-C to quit")
 while True:
   try:
